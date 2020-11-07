@@ -29,6 +29,9 @@ public class BankingCardValidator implements ValidatorInt {
             resultValidator.put("ok", "ok");
             return resultValidator;
         } else {
+            if (!cardMatcher.matches()) {
+                resultValidator.put("Card number problem : ", "wrong card number \n card number should starts within 2 - 6");
+            }
             String cleanCustomerInput = customerCardNumber.replaceAll("[\\s-]", "");
             if (cleanCustomerInput.length() < 16)
                 resultValidator.put("Card number problem : ", "not enough digits in card number");
