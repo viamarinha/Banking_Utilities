@@ -1,6 +1,7 @@
 package andrylat.bankingutilities.dev.mainapplication;
 
 import andrylat.bankingutilities.dev.dialog.ProgressDialog;
+import andrylat.bankingutilities.dev.interfaces.Dialog;
 import andrylat.bankingutilities.dev.interfaces.ValidatorInt;
 import andrylat.bankingutilities.dev.validators.BankingCardValidator;
 
@@ -14,7 +15,7 @@ public class MainApplication {
 
     private static void reRun() {
 
-        ProgressDialog progressDialog = new ProgressDialog();
+        Dialog progressDialog = new ProgressDialog();
         ValidatorInt bankingCardValidator = new BankingCardValidator();
         progressDialog.setCustomerInteraction(bankingCardValidator);
 
