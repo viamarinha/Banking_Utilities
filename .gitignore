@@ -35,6 +35,7 @@
 *.log
 *.iml
 .idea
+.lst
 
 # BlueJ files
 *.ctxt
