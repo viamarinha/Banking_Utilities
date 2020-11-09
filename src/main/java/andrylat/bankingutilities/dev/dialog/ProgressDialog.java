@@ -1,17 +1,15 @@
 package andrylat.bankingutilities.dev.dialog;
 
+import andrylat.bankingutilities.dev.interfaces.Dialog;
 import andrylat.bankingutilities.dev.interfaces.ValidatorInt;
 
 import java.util.Map;
 import java.util.Scanner;
 
-public class ProgressDialog {
+public class ProgressDialog implements Dialog {
 
     private ValidatorInt validatorInt;
 
-    public ValidatorInt getCustomerInteraction() {
-        return validatorInt;
-    }
 
     public void setCustomerInteraction(ValidatorInt validatorInt) {
         this.validatorInt = validatorInt;
