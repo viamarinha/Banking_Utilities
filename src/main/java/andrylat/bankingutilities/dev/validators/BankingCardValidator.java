@@ -2,7 +2,9 @@ package andrylat.bankingutilities.dev.validators;
 
 import andrylat.bankingutilities.dev.interfaces.ValidatorInt;
 
+import java.util.Arrays;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -30,7 +32,10 @@ public class BankingCardValidator implements ValidatorInt {
             return resultValidator;
         } else {
             if (!cardMatcher.matches()) {
-                resultValidator.put("Card number problem : ", "wrong card number \n card number should starts within 2 - 6");
+                List<Integer> validFirstChar = Arrays.asList(2, 3, 4, 5, 6);
+                int firstChar = Character.getNumericValue(customerCardNumber.toCharArray()[0]);
+                if (!validFirstChar.contains(firstChar))
+                    resultValidator.put("Card number problem : ", "wrong card number \n card number should starts within 2 - 6");
             }
             String cleanCustomerInput = customerCardNumber.replaceAll("[\\s-]", "");
             if (cleanCustomerInput.length() < 16)
@@ -39,8 +44,7 @@ public class BankingCardValidator implements ValidatorInt {
                 resultValidator.put("Card number problem : ", "too many digits in card number");
             if (!cleanCustomerInput.matches("[0-9]+"))
                 resultValidator.put("Card number problem :", "you have entered not a numeric digits");
-            if (!customerControlNumber.matches("[\\d]" +
-                    "{3}"))
+            if (!customerControlNumber.matches("[\\d]" + "{3}"))
                 resultValidator.put("Cvv problem :", "Cvv incorrect");
         }
         return resultValidator;
