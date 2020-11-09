@@ -1,32 +1,32 @@
-package andrylat.bankingutilities.dev.mainapplication;
+package andrylat.dev.bankingutilities;
 
-import andrylat.bankingutilities.dev.dialog.ProgressDialog;
-import andrylat.bankingutilities.dev.interfaces.Dialog;
-import andrylat.bankingutilities.dev.interfaces.ValidatorInt;
-import andrylat.bankingutilities.dev.validators.BankingCardValidator;
+import andrylat.dev.bankingutilities.dialog.ProgressDialog;
+import andrylat.dev.bankingutilities.interfaces.Dialog;
+import andrylat.dev.bankingutilities.interfaces.ValidatorInt;
+import andrylat.dev.bankingutilities.validators.BankingCardValidator;
 
 import java.util.Map;
 
 public class MainApplication {
 
     public static void main(String[] args) {
-        reRun();
+        initMainApplication();
     }
 
-    private static void reRun() {
+    private static void initMainApplication() {
 
         Dialog progressDialog = new ProgressDialog();
         ValidatorInt bankingCardValidator = new BankingCardValidator();
         progressDialog.setCustomerInteraction(bankingCardValidator);
 
-        String[] customerCardNumber = progressDialog.getCustomerData();
+        String customerCardNumber = progressDialog.getCustomerData();
 
         Map<String, String> errorResult = progressDialog.interactionWithCustomer(customerCardNumber);
         if (errorResult.entrySet().stream().findFirst().get().getValue().equalsIgnoreCase("ok"))
             paymentSystem();
         else {
             progressDialog.showErrorsLog(errorResult);
-            reRun();
+            initMainApplication();
         }
     }
 
