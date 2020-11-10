@@ -1,6 +1,6 @@
-package andrylat.dev.bankingutilities.validators;
+package dev.andrylat.bankingutilities.validators;
 
-import andrylat.dev.bankingutilities.interfaces.ValidatorInt;
+import dev.andrylat.bankingutilities.interfaces.ValidatorInt;
 
 import java.util.*;
 import java.util.regex.Matcher;

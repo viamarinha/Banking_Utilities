@@ -1,9 +1,9 @@
-package andrylat.dev.bankingutilities;
+package dev.andrylat.bankingutilities;
 
-import andrylat.dev.bankingutilities.dialog.ProgressDialog;
-import andrylat.dev.bankingutilities.interfaces.Dialog;
-import andrylat.dev.bankingutilities.interfaces.ValidatorInt;
-import andrylat.dev.bankingutilities.validators.BankingCardValidator;
+import dev.andrylat.bankingutilities.dialog.ProgressDialog;
+import dev.andrylat.bankingutilities.interfaces.Dialog;
+import dev.andrylat.bankingutilities.interfaces.ValidatorInt;
+import dev.andrylat.bankingutilities.validators.BankingCardValidator;
 
 import java.util.Map;
 

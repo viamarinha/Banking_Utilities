@@ -1,7 +1,7 @@
-package andrylat.dev.bankingutilities.dialog;
+package dev.andrylat.bankingutilities.dialog;
 
-import andrylat.dev.bankingutilities.interfaces.Dialog;
-import andrylat.dev.bankingutilities.interfaces.ValidatorInt;
+import dev.andrylat.bankingutilities.interfaces.Dialog;
+import dev.andrylat.bankingutilities.interfaces.ValidatorInt;
 
 import java.util.Map;
 import java.util.Scanner;

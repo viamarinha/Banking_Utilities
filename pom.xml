@@ -20,7 +20,7 @@
                         <manifest>
                             <addClasspath>true</addClasspath>
                             <classpathPrefix>lib/</classpathPrefix>
-                            <mainClass> andrylat.dev.bankingutilities.MainApplication</mainClass>
+                            <mainClass>dev.andrylat.bankingutilities.MainApplication</mainClass>
                         </manifest>
                     </archive>
                 </configuration>

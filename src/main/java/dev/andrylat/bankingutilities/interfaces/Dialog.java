@@ -1,4 +1,4 @@
-package andrylat.dev.bankingutilities.interfaces;
+package dev.andrylat.bankingutilities.interfaces;
 
 import java.util.Map;
 
