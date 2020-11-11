@@ -1,14 +1,15 @@
 package dev.andrylat.bankingutilities.interfaces;
 
+import java.util.List;
 import java.util.Map;
 
 public interface Dialog {
 
     String getCustomerData();
 
-    <K, V> void showErrorsLog(Map<K, V> errorResult);
+    <K> void showErrorsLog(List<K> errorResult);
 
-    Map<String, String> interactionWithCustomer(String customerInput);
+    List<String> interactionWithCustomer(String customerInput);
 
-    void setCustomerInteraction(ValidatorInt bankingCardValidator);
+    void setCustomerInteraction(CardValidator bankingCardValidator);
 }
