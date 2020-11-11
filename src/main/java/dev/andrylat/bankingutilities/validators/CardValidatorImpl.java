@@ -7,17 +7,17 @@ import java.util.regex.Pattern;
 
 public class CardValidatorImpl implements CardValidator {
 
-    private static final String cardRegex = "([2-6]([0-9]{3})(\\s|-)?)(([0-9]{4}(\\s|-)?){3})";
-    private static final String numericDigits = "[0-9]+";
-    private static final String spaceDashRegex = "[\\s-]";
-    private static final int cardSize = 16;
-    private static final int maxDigitValue = 9;
-    private final List<String> resultValidator = new ArrayList<>();
+    private static final String CARD_REGEX = "([2-6]([0-9]{3})(\\s|-)?)(([0-9]{4}(\\s|-)?){3})";
+    private static final String NUMERIC_DIGITS = "[0-9]+";
+    private static final String SPACE_DASH_REGEX = "[\\s-]";
+    private static final int CREDIT_CARD_NUMBER_SIZE = 16;
+    private static final int MAX_DIGIT_VALUE = 9;
+    private static final Pattern CARD_NUMBER_PATTERN = Pattern.compile(CARD_REGEX);
+    private final List<String> resultValidator = new LinkedList<>();
 
-    public List<String> interactionWithCustomer(String customerInput) {
+    public List<String> customerDataTreatment(String customerInput) {
 
-        Pattern cardNumberPattern = Pattern.compile(cardRegex);
-        Matcher cardMatcher = cardNumberPattern.matcher(customerInput);
+        Matcher cardMatcher = CARD_NUMBER_PATTERN.matcher(customerInput);
         if (cardMatcher.matches()) {
             if (validateControlNumber(customerInput)) {
                 resultValidator.add("ok");
@@ -38,11 +38,11 @@ public class CardValidatorImpl implements CardValidator {
             if (!validFirstChar.contains(firstChar))
                 resultValidator.add("wrong card number \n card number should starts within 2 - 6");
         }
-        if (cleanCustomerInput.length() < cardSize)
+        if (cleanCustomerInput.length() < CREDIT_CARD_NUMBER_SIZE)
             resultValidator.add("not enough digits in card number");
-        if (cleanCustomerInput.length() > cardSize)
+        if (cleanCustomerInput.length() > CREDIT_CARD_NUMBER_SIZE)
             resultValidator.add("too many digits in card number");
-        if (!cleanCustomerInput.matches(numericDigits))
+        if (!cleanCustomerInput.matches(NUMERIC_DIGITS))
             resultValidator.add("you have entered not a numeric digits");
     }
 
@@ -58,7 +58,7 @@ public class CardValidatorImpl implements CardValidator {
         for (int count = creditCardInt.size() - 2; count >= 0; count -= 2) {
             int tmpValue = creditCardInt.get(count);
             tmpValue *= 2;
-            if (tmpValue > maxDigitValue)
+            if (tmpValue > MAX_DIGIT_VALUE)
                 tmpValue = tmpValue % 10 + 1;
             creditCardInt.set(count, tmpValue);
         }
@@ -74,7 +74,7 @@ public class CardValidatorImpl implements CardValidator {
     }
 
     private String format(String customerInput) {
-        String cleanCustomerInput = customerInput.replaceAll(spaceDashRegex, "");
+        String cleanCustomerInput = customerInput.replaceAll(SPACE_DASH_REGEX, "");
         return cleanCustomerInput;
     }
 

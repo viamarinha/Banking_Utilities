@@ -4,7 +4,6 @@ import dev.andrylat.bankingutilities.interfaces.Dialog;
 import dev.andrylat.bankingutilities.interfaces.CardValidator;
 
 import java.util.List;
-import java.util.Map;
 import java.util.Scanner;
 
 public class ProgressDialog implements Dialog {
@@ -31,6 +30,6 @@ public class ProgressDialog implements Dialog {
     }
 
     public List<String> interactionWithCustomer(String customerInput) {
-        return validatorInt.interactionWithCustomer(customerInput);
+        return validatorInt.customerDataTreatment(customerInput);
     }
 }
