@@ -1,17 +1,18 @@
 package dev.andrylat.bankingutilities.dialog;
 
 import dev.andrylat.bankingutilities.interfaces.Dialog;
-import dev.andrylat.bankingutilities.interfaces.ValidatorInt;
+import dev.andrylat.bankingutilities.interfaces.CardValidator;
 
+import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
 
 public class ProgressDialog implements Dialog {
 
-    private ValidatorInt validatorInt;
+    private CardValidator validatorInt;
 
 
-    public void setCustomerInteraction(ValidatorInt validatorInt)  {
+    public void setCustomerInteraction(CardValidator validatorInt)  {
         this.validatorInt = validatorInt;
     }
 
@@ -24,14 +25,12 @@ public class ProgressDialog implements Dialog {
         return customerCardNumber;
     }
 
-    public   <K, V> void showErrorsLog(Map<K, V> errorResult) {
-        for (Map.Entry<K, V> entry : errorResult.entrySet()) {
-            System.out.println(entry.getKey() + " " + entry.getValue());
-        }
+    @Override
+    public <K> void showErrorsLog(List<K> errorResult) {
+        errorResult.forEach(System.out::println);
     }
 
-
-    public Map<String, String> interactionWithCustomer(String customerInput) {
+    public List<String> interactionWithCustomer(String customerInput) {
         return validatorInt.interactionWithCustomer(customerInput);
     }
 }
