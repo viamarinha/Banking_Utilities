@@ -2,9 +2,10 @@ package dev.andrylat.bankingutilities;
 
 import dev.andrylat.bankingutilities.dialog.ProgressDialog;
 import dev.andrylat.bankingutilities.interfaces.Dialog;
-import dev.andrylat.bankingutilities.interfaces.ValidatorInt;
-import dev.andrylat.bankingutilities.validators.BankingCardValidator;
+import dev.andrylat.bankingutilities.interfaces.CardValidator;
+import dev.andrylat.bankingutilities.validators.CardValidatorImpl;
 
+import java.util.List;
 import java.util.Map;
 
 public class MainApplication {
@@ -16,13 +17,13 @@ public class MainApplication {
     private static void initMainApplication() {
 
         Dialog progressDialog = new ProgressDialog();
-        ValidatorInt bankingCardValidator = new BankingCardValidator();
+        CardValidator bankingCardValidator = new CardValidatorImpl();
         progressDialog.setCustomerInteraction(bankingCardValidator);
 
         String customerCardNumber = progressDialog.getCustomerData();
 
-        Map<String, String> errorResult = progressDialog.interactionWithCustomer(customerCardNumber);
-        if (errorResult.entrySet().stream().findFirst().get().getValue().equalsIgnoreCase("ok"))
+        List<String> errorResult = progressDialog.interactionWithCustomer(customerCardNumber);
+        if (errorResult.stream().findFirst().get().equalsIgnoreCase("ok"))
             paymentSystem();
         else {
             progressDialog.showErrorsLog(errorResult);
