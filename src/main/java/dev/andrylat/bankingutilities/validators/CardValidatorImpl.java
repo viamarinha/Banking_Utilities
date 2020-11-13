@@ -15,7 +15,7 @@ public class CardValidatorImpl implements CardValidator {
     private static final Pattern CARD_NUMBER_PATTERN = Pattern.compile(CARD_REGEX);
     private final List<String> resultValidator = new LinkedList<>();
 
-    public List<String> customerDataTreatment(String customerInput) {
+    public List<String> validate(String customerInput) {
 
         Matcher cardMatcher = CARD_NUMBER_PATTERN.matcher(customerInput);
         if (cardMatcher.matches()) {
