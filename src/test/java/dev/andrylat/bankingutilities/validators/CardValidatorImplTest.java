@@ -1,70 +1,85 @@
 package dev.andrylat.bankingutilities.validators;
 
 import dev.andrylat.bankingutilities.interfaces.CardValidator;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+
 import java.util.List;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 class CardValidatorImplTest {
 
-    @Test
-    void customer_input_is_correct() {
+    private CardValidator cardValidator;
 
-            String customerInput = "4024007192661477";
-        CardValidator cardValidator = new CardValidatorImpl();
-            List<String> actual = cardValidator.customerDataTreatment(customerInput);
-            assertEquals("ok", actual.get(0));
+    @BeforeEach
+    void setUp() {
+
+        cardValidator = new CardValidatorImpl();
 
     }
+
     @Test
-    void customer_input_wrong_control_number() {
+    void validateControlNumber_numberIsOk_CustomerInputRightData() {
+
+        String customerInput = "4024007192661477";
+        List<String> actual = cardValidator.validate(customerInput);
+        assertEquals("ok", actual.get(0));
+
+    }
+
+    @Test
+    void validateControlNumber_PrintIncorrectControlNumber_ControlNumberNoGood() {
 
         String customerInput = "4024 007192661478";
-        CardValidator cardValidator  = new CardValidatorImpl();
-        List<String> actual = cardValidator.customerDataTreatment(customerInput);
+        List<String> actual = cardValidator.validate(customerInput);
         assertEquals("incorrect control number", actual.get(0));
 
     }
 
     @Test
-    void customer_input_not_enough_digits(){
+    void validate_Print2Messages_ShortControlNumber() {
+
         String customerInput = "7899";
-        CardValidator cardValidator  = new CardValidatorImpl();
-        List<String> actual = cardValidator.customerDataTreatment(customerInput);
-        assertEquals("wrong card number \n card number should starts within 2 - 6",actual.get(0));
-        assertEquals("not enough digits in card number",actual.get(1));
-    }
-    @Test
-    void customer_input_not_enough_digits_alphabetical_character(){
-        String customerInput = "A899";
-        CardValidator cardValidator  = new CardValidatorImpl();
-        List<String> actual = cardValidator.customerDataTreatment(customerInput);
-        assertEquals("wrong card number \n card number should starts within 2 - 6",actual.get(0));
-        assertEquals("not enough digits in card number",actual.get(1));
-        assertEquals("you have entered not a numeric digits",actual.get(2));
-    }
-    @Test
-    void customer_input_too_many_digits(){
-        String customerInput = "54478987858522222222";
-        CardValidator cardValidator  = new CardValidatorImpl();
-        List<String> actual = cardValidator.customerDataTreatment(customerInput);
-        assertEquals("too many digits in card number",actual.get(0));
-    }
-    @Test
-    void customer_input_too_many_digits_alphabetical_character(){
-        String customerInput = "A784-8989-8888-8787-7777";
-        CardValidator cardValidator  = new CardValidatorImpl();
-        List<String> actual = cardValidator.customerDataTreatment(customerInput);
-        assertEquals("wrong card number \n card number should starts within 2 - 6",actual.get(0));
-        assertEquals("too many digits in card number",actual.get(1));
-        assertEquals("you have entered not a numeric digits",actual.get(2));
+        List<String> actual = cardValidator.validate(customerInput);
+        assertEquals("wrong card number \n card number should starts within 2 - 6", actual.get(0));
+        assertEquals("not enough digits in card number", actual.get(1));
     }
 
     @Test
-    void customer_input_not_a_banking_card(){
+    void validate_Print3Messages_AlphabeticalInput() {
+
+        String customerInput = "A899";
+        List<String> actual = cardValidator.validate(customerInput);
+        assertEquals("wrong card number \n card number should starts within 2 - 6", actual.get(0));
+        assertEquals("not enough digits in card number", actual.get(1));
+        assertEquals("you have entered not a numeric digits", actual.get(2));
+    }
+
+    @Test
+    void validate_PrintTooManyDigits_InputTooManyDigits() {
+
+        String customerInput = "54478987858522222222";
+        List<String> actual = cardValidator.validate(customerInput);
+        assertEquals("too many digits in card number", actual.get(0));
+    }
+
+    @Test
+    void validate_print3Messages_inputAlphanumericDigits() {
+
+        String customerInput = "A784-8989-8888-8787-7777";
+        List<String> actual = cardValidator.validate(customerInput);
+        assertEquals("wrong card number \n card number should starts within 2 - 6", actual.get(0));
+        assertEquals("too many digits in card number", actual.get(1));
+        assertEquals("you have entered not a numeric digits", actual.get(2));
+    }
+
+    @Test
+    void validate_printWrongCardNumber_inputWrongNumber() {
+
         String customerInput = "9784545454545454";
-        CardValidator cardValidator = new CardValidatorImpl();
-        List<String> actual = cardValidator.customerDataTreatment(customerInput);
-        assertEquals("wrong card number \n card number should starts within 2 - 6",actual.get(0));
+        List<String> actual = cardValidator.validate(customerInput);
+        assertEquals("wrong card number \n card number should starts within 2 - 6", actual.get(0));
     }
 }
