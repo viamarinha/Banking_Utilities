@@ -1,6 +1,6 @@
-package dev.andrylat.bankingutilities.validators;
+package dev.andrylat.bankingutilities.bankingcreditsystem.validators;
 
-import dev.andrylat.bankingutilities.interfaces.CardValidator;
+import dev.andrylat.bankingutilities.bankingcreditsystem.bankingsysteminterfaces.CardValidator;
 import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -13,20 +13,19 @@ public class CardValidatorImpl implements CardValidator {
     private static final int CREDIT_CARD_NUMBER_SIZE = 16;
     private static final int MAX_DIGIT_VALUE = 9;
     private static final Pattern CARD_NUMBER_PATTERN = Pattern.compile(CARD_REGEX);
-    private final List<String> resultValidator = new LinkedList<>();
+    private  List<String> validationMessages = new LinkedList<>();;
 
     public List<String> validate(String customerInput) {
 
         Matcher cardMatcher = CARD_NUMBER_PATTERN.matcher(customerInput);
         if (cardMatcher.matches()) {
             if (validateControlNumber(customerInput)) {
-                resultValidator.add("ok");
-                return resultValidator;
+                return validationMessages;
             }
         } else {
             cardsErrorsTreatments(customerInput, cardMatcher);
         }
-        return resultValidator;
+        return validationMessages;
     }
 
     private void cardsErrorsTreatments(String customerInput, Matcher cardMatcher) {
@@ -36,14 +35,14 @@ public class CardValidatorImpl implements CardValidator {
             List<Integer> validFirstChar = Arrays.asList(2, 3, 4, 5, 6);
             int firstChar = Character.getNumericValue(customerInput.toCharArray()[0]);
             if (!validFirstChar.contains(firstChar))
-                resultValidator.add("wrong card number \n card number should starts within 2 - 6");
+                validationMessages.add("wrong card number \n card number should starts within 2 - 6");
         }
         if (cleanCustomerInput.length() < CREDIT_CARD_NUMBER_SIZE)
-            resultValidator.add("not enough digits in card number");
+            validationMessages.add("not enough digits in card number");
         if (cleanCustomerInput.length() > CREDIT_CARD_NUMBER_SIZE)
-            resultValidator.add("too many digits in card number");
+            validationMessages.add("too many digits in card number");
         if (!cleanCustomerInput.matches(NUMERIC_DIGITS))
-            resultValidator.add("you have entered not a numeric digits");
+            validationMessages.add("you have entered not a numeric digits");
     }
 
     private boolean validateControlNumber(String customerInput) {
@@ -63,19 +62,18 @@ public class CardValidatorImpl implements CardValidator {
             creditCardInt.set(count, tmpValue);
         }
 
-        int SumAllDigits = creditCardInt.stream().mapToInt(Integer::intValue).sum();
+        int sumAllDigits = creditCardInt.stream().mapToInt(Integer::intValue).sum();
 
-        if (SumAllDigits % 10 == 0) {
+        if (sumAllDigits % 10 == 0) {
             return true;
         } else {
-            resultValidator.add("incorrect control number");
+            validationMessages.add("incorrect control number");
             return false;
         }
     }
 
     private String format(String customerInput) {
-        String cleanCustomerInput = customerInput.replaceAll(SPACE_DASH_REGEX, "");
-        return cleanCustomerInput;
+        return customerInput.replaceAll(SPACE_DASH_REGEX, "");
     }
 
 }

@@ -1,4 +1,4 @@
-package dev.andrylat.bankingutilities.interfaces;
+package dev.andrylat.bankingutilities.bankingcreditsystem.bankingsysteminterfaces;
 
 import java.util.List;
 

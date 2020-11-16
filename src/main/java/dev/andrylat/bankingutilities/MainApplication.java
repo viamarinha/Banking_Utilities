@@ -1,61 +1,87 @@
 package dev.andrylat.bankingutilities;
 
-import dev.andrylat.bankingutilities.Enumerations.BankingCardType;
-import dev.andrylat.bankingutilities.dialog.ProgressDialog;
-import dev.andrylat.bankingutilities.interfaces.CardTypeValidator;
-import dev.andrylat.bankingutilities.interfaces.Dialog;
-import dev.andrylat.bankingutilities.interfaces.CardValidator;
-import dev.andrylat.bankingutilities.interfaces.MortgagePayment;
-import dev.andrylat.bankingutilities.mortgagecalculator.MortgagePaymentImpl;
-import dev.andrylat.bankingutilities.validators.CardTypeValidatorImpl;
-import dev.andrylat.bankingutilities.validators.CardValidatorImpl;
+import dev.andrylat.bankingutilities.mortgagecalculator.mortgagedialog.MortgageDialog;
+import dev.andrylat.bankingutilities.mortgagecalculator.mortgagedialog.MortgageDialogImpl;
+import dev.andrylat.bankingutilities.mortgagecalculator.mortgagepayment.MortgagePayment;
+import dev.andrylat.bankingutilities.mortgagecalculator.mortgagepayment.MortgagePaymentImpl;
+import dev.andrylat.bankingutilities.initialsystem.systemchoicedialog.InitialDialogImpl;
+import dev.andrylat.bankingutilities.bankingcreditsystem.bankingsystemsdialogs.BankingSystemDialogImpl;
+import dev.andrylat.bankingutilities.initialsystem.systemchoicevalidators.InitialSystemValidator;
+import dev.andrylat.bankingutilities.bankingcreditsystem.bankingsysteminterfaces.PaymentValidator;
+import dev.andrylat.bankingutilities.bankingcreditsystem.bankingsystemsdialogs.BankingSystemDialog;
+import dev.andrylat.bankingutilities.bankingcreditsystem.bankingsysteminterfaces.CardValidator;
+import dev.andrylat.bankingutilities.initialsystem.systemchoicedialog.InitialDialog;
+import dev.andrylat.bankingutilities.initialsystem.systemchoicevalidators.InitialSystemValidatorImpl;
+import dev.andrylat.bankingutilities.bankingcreditsystem.validators.PaymentValidatorImpl;
+import dev.andrylat.bankingutilities.bankingcreditsystem.validators.CardValidatorImpl;
 
 import java.util.List;
 
 public class MainApplication {
 
     public static void main(String[] args) {
+
         initMainApplication();
+
     }
 
     private static void initMainApplication() {
 
-        Dialog progressDialog = new ProgressDialog();
-        CardValidator bankingCardValidator = new CardValidatorImpl();
-        progressDialog.setBankingCardValidator(bankingCardValidator);
-        String customerCardNumber = progressDialog.getCustomerData();
+        String customerSystemChoice = "";
+        InitialDialog initDialog = new InitialDialogImpl();
+        InitialSystemValidator initialSystemValidator = new InitialSystemValidatorImpl();
+        boolean validCustomerInput = false;
+        while (!validCustomerInput) {
+            customerSystemChoice = initDialog.startDialog();
+            validCustomerInput = initialSystemValidator.validateCustomerChoice(customerSystemChoice);
+        }
+        int system = Integer.parseInt(customerSystemChoice);
+        switch (system) {
+            case 1:
+                bankingSystemValidation();
+                break;
+            case 2:
+                mortgageCalculation();
+                break;
+            default:
+                break;
+        }
 
-        List<String> errorResult = progressDialog.validateCustomerInput(customerCardNumber);
-        if (errorResult.stream().findFirst().get().equalsIgnoreCase("ok")) {
-            showPaymentSystem(customerCardNumber, progressDialog);
-            calculationMortgagePayments(progressDialog);
-            progressDialog.showMortgagePayment();
+    }
+
+    private static void bankingSystemValidation() {
+
+        BankingSystemDialog bankingSystemDialog = new BankingSystemDialogImpl();
+        CardValidator cardValidator = new CardValidatorImpl();
+        bankingSystemDialog.setBankingCardValidator(cardValidator);
+        String customerCardNumber = bankingSystemDialog.getCustomerData();
+
+        List<String> errorResult = bankingSystemDialog.validateCustomerInput(customerCardNumber);
+        if (errorResult == null) {
+            showPaymentSystem(customerCardNumber, bankingSystemDialog);
         } else {
-            progressDialog.showErrorsLog(errorResult);
-            initMainApplication();
+            bankingSystemDialog.showErrorsLog(errorResult);
+            bankingSystemValidation();
         }
     }
 
-    private static void showPaymentSystem(String customerCardNumber, Dialog progressDialog) {
+    private static void showPaymentSystem(String customerCardNumber, BankingSystemDialog bankingSystemDialog) {
 
-        BankingCardType[] bankingCardTypes = BankingCardType.values();
-        CardTypeValidator cardTypeValidator = new CardTypeValidatorImpl(Integer.parseInt(String.valueOf(customerCardNumber.toCharArray()[0])));
-        progressDialog.setCardTypeValidator(cardTypeValidator);
-        cardTypeValidator.setPossibleCards(bankingCardTypes);
-        progressDialog.showCardType();
+        int paymentCompanyIdentifier = Integer.parseInt(String.valueOf(customerCardNumber.toCharArray()[0]));
+        PaymentValidator paymentValidator = new PaymentValidatorImpl(paymentCompanyIdentifier);
+        bankingSystemDialog.setCardTypeValidator(paymentValidator);
+        bankingSystemDialog.showCardType();
 
     }
 
-    private static void calculationMortgagePayments(Dialog progressDialog) {
+    private static void mortgageCalculation() {
 
         MortgagePayment mortgagePayment = new MortgagePaymentImpl();
-        progressDialog.setMortgagePayment(mortgagePayment);
-        mortgagePayment.setDetailsForCalculation(paymentSystem(progressDialog));
-        mortgagePayment.monthlyPaymentCalculation();
+        MortgageDialog mortgageDialog = new MortgageDialogImpl();
+        mortgageDialog.setMortgagePayments(mortgagePayment);
+        mortgagePayment.setDetailsForCalculation(mortgageDialog.customerPaymentMenu());
+        mortgagePayment.paymentCalculation();
+        mortgageDialog.showResult();
 
-    }
-
-    private static double[] paymentSystem(Dialog progressDialog) {
-        return progressDialog.customerPaymentMenu();
     }
 }
