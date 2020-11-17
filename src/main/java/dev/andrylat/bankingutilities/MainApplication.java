@@ -1,21 +1,18 @@
 package dev.andrylat.bankingutilities;
 
-import dev.andrylat.bankingutilities.mortgagecalculator.mortgagedialog.MortgageDialog;
-import dev.andrylat.bankingutilities.mortgagecalculator.mortgagedialog.MortgageDialogImpl;
-import dev.andrylat.bankingutilities.mortgagecalculator.mortgagepayment.MortgagePayment;
-import dev.andrylat.bankingutilities.mortgagecalculator.mortgagepayment.MortgagePaymentImpl;
-import dev.andrylat.bankingutilities.initialsystem.systemchoicedialog.InitialDialogImpl;
-import dev.andrylat.bankingutilities.bankingcreditsystem.bankingsystemsdialogs.BankingSystemDialogImpl;
-import dev.andrylat.bankingutilities.initialsystem.systemchoicevalidators.InitialSystemValidator;
-import dev.andrylat.bankingutilities.bankingcreditsystem.bankingsysteminterfaces.PaymentValidator;
-import dev.andrylat.bankingutilities.bankingcreditsystem.bankingsystemsdialogs.BankingSystemDialog;
-import dev.andrylat.bankingutilities.bankingcreditsystem.bankingsysteminterfaces.CardValidator;
-import dev.andrylat.bankingutilities.initialsystem.systemchoicedialog.InitialDialog;
-import dev.andrylat.bankingutilities.initialsystem.systemchoicevalidators.InitialSystemValidatorImpl;
-import dev.andrylat.bankingutilities.bankingcreditsystem.validators.PaymentValidatorImpl;
-import dev.andrylat.bankingutilities.bankingcreditsystem.validators.CardValidatorImpl;
+import dev.andrylat.bankingutilities.dialog.*;
+import dev.andrylat.bankingutilities.mortgagecalculator.MortgagePayment;
+import dev.andrylat.bankingutilities.mortgagecalculator.MortgagePaymentImpl;
+import dev.andrylat.bankingutilities.cardvalidator.validators.InitialSystemValidator;
+import dev.andrylat.bankingutilities.cardvalidator.validators.PaymentValidator;
+import dev.andrylat.bankingutilities.cardvalidator.validators.CardValidator;
+import dev.andrylat.bankingutilities.cardvalidator.validators.InitialSystemValidatorImpl;
+import dev.andrylat.bankingutilities.cardvalidator.validators.PaymentValidatorImpl;
+import dev.andrylat.bankingutilities.cardvalidator.validators.CardValidatorImpl;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class MainApplication {
 
@@ -27,27 +24,18 @@ public class MainApplication {
 
     private static void initMainApplication() {
 
-        String customerSystemChoice = "";
-        InitialDialog initDialog = new InitialDialogImpl();
-        InitialSystemValidator initialSystemValidator = new InitialSystemValidatorImpl();
-        boolean validCustomerInput = false;
-        while (!validCustomerInput) {
-            customerSystemChoice = initDialog.startDialog();
-            validCustomerInput = initialSystemValidator.validateCustomerChoice(customerSystemChoice);
-        }
-        int system = Integer.parseInt(customerSystemChoice);
-        switch (system) {
-            case 1:
-                bankingSystemValidation();
-                break;
-            case 2:
-                mortgageCalculation();
-                break;
-            default:
-                break;
-        }
 
+        Dialog initDialog = new InitialDialogImpl();
+
+        InitialSystemValidator initialSystemValidator = new InitialSystemValidatorImpl();
+        ((InitialDialogImpl) initDialog).setInitialSystemValidator(initialSystemValidator);
+
+//        boolean validCustomerInput = false;
+//        while (!validCustomerInput) {
+//
+//            validCustomerInput = initialSystemValidator.validateCustomerChoice(customerSystemChoice);
     }
+
 
     private static void bankingSystemValidation() {
 

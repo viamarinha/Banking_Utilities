@@ -1,6 +1,6 @@
-package dev.andrylat.bankingutilities.bankingcreditsystem.validators;
+package dev.andrylat.bankingutilities.cardvalidator.validators;
 
-import dev.andrylat.bankingutilities.bankingcreditsystem.bankingsystemenums.CardCompany;
+import dev.andrylat.bankingutilities.cardvalidator.bankingsystemenums.PaymentSystem;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.function.Executable;
 
@@ -12,9 +12,9 @@ class PaymentValidatorImplTest {
     void customerCardType_shouldReturnMasterCard2017_whenSystemId2() {
 
         int systemId = 2;
-        CardCompany cardCompany = CardCompany.getCardCompanyByIdentifier(systemId);
+        PaymentSystem paymentSystem = PaymentSystem.getCardCompanyByIdentifier(systemId);
         String actual = "MasterCard2017";
-        String expected = cardCompany.getPaymentType();
+        String expected = paymentSystem.getPaymentType();
         assertEquals(expected, actual);
     }
 
@@ -22,9 +22,9 @@ class PaymentValidatorImplTest {
     void customerCardType_shouldReturnAmericanExpress_whenSystemId3(){
 
         int systemId = 3;
-        CardCompany cardCompany = CardCompany.getCardCompanyByIdentifier(systemId);
+        PaymentSystem paymentSystem = PaymentSystem.getCardCompanyByIdentifier(systemId);
         String actual = "AmericanExpress";
-        String expected = cardCompany.getPaymentType();
+        String expected = paymentSystem.getPaymentType();
         assertEquals(expected, actual);
     }
 
@@ -32,9 +32,9 @@ class PaymentValidatorImplTest {
     void customerCardType_shouldReturnVisa_whenSystemId4(){
 
         int systemId = 4;
-        CardCompany cardCompany = CardCompany.getCardCompanyByIdentifier(systemId);
+        PaymentSystem paymentSystem = PaymentSystem.getCardCompanyByIdentifier(systemId);
         String actual = "Visa";
-        String expected = cardCompany.getPaymentType();
+        String expected = paymentSystem.getPaymentType();
         assertEquals(expected, actual);
     }
 
@@ -42,9 +42,9 @@ class PaymentValidatorImplTest {
     void customerCardType_shouldReturnMasterCard_whenSystemId5(){
 
         int systemId = 5;
-        CardCompany cardCompany = CardCompany.getCardCompanyByIdentifier(systemId);
+        PaymentSystem paymentSystem = PaymentSystem.getCardCompanyByIdentifier(systemId);
         String actual = "MasterCard";
-        String expected = cardCompany.getPaymentType();
+        String expected = paymentSystem.getPaymentType();
         assertEquals(expected, actual);
     }
 
@@ -52,9 +52,9 @@ class PaymentValidatorImplTest {
     void customerCardType_shouldReturnMasterCard_whenSystemId6(){
 
         int systemId = 6;
-        CardCompany cardCompany = CardCompany.getCardCompanyByIdentifier(systemId);
+        PaymentSystem paymentSystem = PaymentSystem.getCardCompanyByIdentifier(systemId);
         String actual = "Discover";
-        String expected = cardCompany.getPaymentType();
+        String expected = paymentSystem.getPaymentType();
         assertEquals(expected, actual);
     }
 
@@ -62,9 +62,9 @@ class PaymentValidatorImplTest {
     void customerCardType_shouldReturnNull_whenWrongSystemId(){
 
         int systemId = 8;
-        CardCompany cardCompany = CardCompany.getCardCompanyByIdentifier(systemId);
+        PaymentSystem paymentSystem = PaymentSystem.getCardCompanyByIdentifier(systemId);
         Class<NullPointerException> expected = NullPointerException.class ;
-        Executable actual = () -> cardCompany.getPaymentType();
+        Executable actual = () -> paymentSystem.getPaymentType();
         assertThrows(expected, actual);
 
     }

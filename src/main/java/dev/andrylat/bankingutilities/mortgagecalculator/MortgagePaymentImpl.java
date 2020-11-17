@@ -1,5 +1,7 @@
-package dev.andrylat.bankingutilities.mortgagecalculator.mortgagepayment;
+package dev.andrylat.bankingutilities.mortgagecalculator;
 
+
+import java.text.DecimalFormat;
 
 public class MortgagePaymentImpl implements MortgagePayment {
     private static final int YEAR = 1;
@@ -52,7 +54,8 @@ public class MortgagePaymentImpl implements MortgagePayment {
         interestRate = (interestRate / 100) / 12;
         double monthPeriods = yearsPeriod * 12;
         payment = (principalAmount * interestRate) / (1 - Math.pow(1 + interestRate, -monthPeriods));
-        payment = Math.round(payment * 100) / 100;
+
+        payment = Double.parseDouble(new DecimalFormat("######.##").format(payment));
     }
 
     private void setUpCalculationDetails(double[] detailsForCalculation) {

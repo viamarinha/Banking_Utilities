@@ -1,6 +1,6 @@
-package dev.andrylat.bankingutilities.mortgagecalculator.mortgagedialog;
+package dev.andrylat.bankingutilities.dialog;
 
-import dev.andrylat.bankingutilities.mortgagecalculator.mortgagepayment.MortgagePayment;
+import dev.andrylat.bankingutilities.mortgagecalculator.MortgagePayment;
 
 import java.util.Scanner;
 

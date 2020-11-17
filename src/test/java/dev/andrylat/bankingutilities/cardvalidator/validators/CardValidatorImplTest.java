@@ -1,11 +1,9 @@
-package dev.andrylat.bankingutilities.bankingcreditsystem.validators;
+package dev.andrylat.bankingutilities.cardvalidator.validators;
 
-import dev.andrylat.bankingutilities.bankingcreditsystem.bankingsysteminterfaces.CardValidator;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;

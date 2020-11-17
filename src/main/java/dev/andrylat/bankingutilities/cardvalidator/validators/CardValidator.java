@@ -1,4 +1,4 @@
-package dev.andrylat.bankingutilities.bankingcreditsystem.bankingsysteminterfaces;
+package dev.andrylat.bankingutilities.cardvalidator.validators;
 
 import java.util.List;
 

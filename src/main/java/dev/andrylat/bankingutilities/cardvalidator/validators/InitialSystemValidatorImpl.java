@@ -1,4 +1,4 @@
-package dev.andrylat.bankingutilities.initialsystem.systemchoicevalidators;
+package dev.andrylat.bankingutilities.cardvalidator.validators;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -14,6 +14,11 @@ public class InitialSystemValidatorImpl implements InitialSystemValidator {
     public boolean validateCustomerChoice(String customerSystemChoice) {
         Matcher systemMatcher = SYSTEM_PATTERN.matcher(customerSystemChoice);
         return (systemMatcher.matches());
+
+    }
+
+    @Override
+    public void run() {
 
     }
 }

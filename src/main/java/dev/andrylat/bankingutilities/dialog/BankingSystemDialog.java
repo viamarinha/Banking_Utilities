@@ -1,11 +1,11 @@
-package dev.andrylat.bankingutilities.bankingcreditsystem.bankingsystemsdialogs;
+package dev.andrylat.bankingutilities.dialog;
 
-import dev.andrylat.bankingutilities.bankingcreditsystem.bankingsysteminterfaces.PaymentValidator;
-import dev.andrylat.bankingutilities.bankingcreditsystem.bankingsysteminterfaces.CardValidator;
+import dev.andrylat.bankingutilities.cardvalidator.validators.CardValidator;
+import dev.andrylat.bankingutilities.cardvalidator.validators.PaymentValidator;
 
 import java.util.List;
 
-public interface BankingSystemDialog {
+public interface BankingSystemDialog extends Dialog{
 
     String getCustomerData();
 

@@ -1,4 +1,4 @@
-package dev.andrylat.bankingutilities.mortgagecalculator.mortgagepayment;
+package dev.andrylat.bankingutilities.mortgagecalculator;
 
 public interface MortgagePayment {
 

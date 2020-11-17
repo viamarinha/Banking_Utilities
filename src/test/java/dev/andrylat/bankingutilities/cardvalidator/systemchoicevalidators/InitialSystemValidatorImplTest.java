@@ -1,6 +1,7 @@
-package dev.andrylat.bankingutilities.initialsystem.systemchoicevalidators;
+package dev.andrylat.bankingutilities.cardvalidator.systemchoicevalidators;
 
-import dev.andrylat.bankingutilities.bankingcreditsystem.validators.CardValidatorImpl;
+import dev.andrylat.bankingutilities.cardvalidator.validators.InitialSystemValidator;
+import dev.andrylat.bankingutilities.cardvalidator.validators.InitialSystemValidatorImpl;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 

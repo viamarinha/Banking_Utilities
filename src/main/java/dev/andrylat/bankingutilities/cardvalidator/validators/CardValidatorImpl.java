@@ -1,6 +1,5 @@
-package dev.andrylat.bankingutilities.bankingcreditsystem.validators;
+package dev.andrylat.bankingutilities.cardvalidator.validators;
 
-import dev.andrylat.bankingutilities.bankingcreditsystem.bankingsysteminterfaces.CardValidator;
 import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -13,7 +12,8 @@ public class CardValidatorImpl implements CardValidator {
     private static final int CREDIT_CARD_NUMBER_SIZE = 16;
     private static final int MAX_DIGIT_VALUE = 9;
     private static final Pattern CARD_NUMBER_PATTERN = Pattern.compile(CARD_REGEX);
-    private  List<String> validationMessages = new LinkedList<>();;
+    private List<String> validationMessages = new LinkedList<>();
+    ;
 
     public List<String> validate(String customerInput) {
 
@@ -34,13 +34,16 @@ public class CardValidatorImpl implements CardValidator {
         if (!cardMatcher.matches()) {
             List<Integer> validFirstChar = Arrays.asList(2, 3, 4, 5, 6);
             int firstChar = Character.getNumericValue(customerInput.toCharArray()[0]);
+
             if (!validFirstChar.contains(firstChar))
                 validationMessages.add("wrong card number \n card number should starts within 2 - 6");
         }
         if (cleanCustomerInput.length() < CREDIT_CARD_NUMBER_SIZE)
             validationMessages.add("not enough digits in card number");
+
         if (cleanCustomerInput.length() > CREDIT_CARD_NUMBER_SIZE)
             validationMessages.add("too many digits in card number");
+
         if (!cleanCustomerInput.matches(NUMERIC_DIGITS))
             validationMessages.add("you have entered not a numeric digits");
     }
