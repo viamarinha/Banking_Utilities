@@ -1,9 +1,6 @@
-package dev.andrylat.bankingutilities.cardvalidator.validators;
+package dev.andrylat.bankingutilities.card;
 
-import dev.andrylat.bankingutilities.cardvalidator.bankingsystemenums.PaymentSystem;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.function.Executable;
-
 import static org.junit.jupiter.api.Assertions.*;
 
 class PaymentValidatorImplTest {
@@ -58,15 +55,6 @@ class PaymentValidatorImplTest {
         assertEquals(expected, actual);
     }
 
-    @Test
-    void customerCardType_shouldReturnNull_whenWrongSystemId(){
 
-        int systemId = 8;
-        PaymentSystem paymentSystem = PaymentSystem.getCardCompanyByIdentifier(systemId);
-        Class<NullPointerException> expected = NullPointerException.class ;
-        Executable actual = () -> paymentSystem.getPaymentType();
-        assertThrows(expected, actual);
-
-    }
 
 }

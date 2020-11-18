@@ -1,16 +1,12 @@
-package dev.andrylat.bankingutilities.cardvalidator.validators;
-
-import dev.andrylat.bankingutilities.cardvalidator.bankingsystemenums.PaymentSystem;
+package dev.andrylat.bankingutilities.card;
 
 public class PaymentValidatorImpl implements PaymentValidator {
-
 
     private int paymentCompanyIdentifier;
 
     public PaymentValidatorImpl(int paymentCompanyIdentifier) {
         this.paymentCompanyIdentifier = paymentCompanyIdentifier;
     }
-
 
     @Override
     public String customerCardType() {

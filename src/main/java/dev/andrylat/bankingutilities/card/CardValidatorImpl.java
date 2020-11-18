@@ -1,4 +1,4 @@
-package dev.andrylat.bankingutilities.cardvalidator.validators;
+package dev.andrylat.bankingutilities.card;
 
 import java.util.*;
 import java.util.regex.Matcher;
@@ -13,7 +13,6 @@ public class CardValidatorImpl implements CardValidator {
     private static final int MAX_DIGIT_VALUE = 9;
     private static final Pattern CARD_NUMBER_PATTERN = Pattern.compile(CARD_REGEX);
     private List<String> validationMessages = new LinkedList<>();
-    ;
 
     public List<String> validate(String customerInput) {
 

@@ -1,7 +1,7 @@
-package dev.andrylat.bankingutilities.dialog;
+package dev.andrylat.bankingutilities.dialogs;
 
-import dev.andrylat.bankingutilities.cardvalidator.validators.CardValidator;
-import dev.andrylat.bankingutilities.cardvalidator.validators.PaymentValidator;
+import dev.andrylat.bankingutilities.card.CardValidator;
+import dev.andrylat.bankingutilities.card.PaymentValidator;
 
 import java.util.List;
 import java.util.Scanner;
@@ -11,17 +11,13 @@ public class BankingSystemDialogImpl implements BankingSystemDialog {
     private CardValidator validatorInt;
     private PaymentValidator paymentValidator;
 
-    public void start1() {
-        System.out.println("You are in Banking Dialog");
-    }
-
     @Override
     public void setBankingCardValidator(CardValidator validatorInt) {
         this.validatorInt = validatorInt;
     }
 
     @Override
-    public void setCardTypeValidator(PaymentValidator paymentValidator){
+    public void setCardTypeValidator(PaymentValidator paymentValidator) {
         this.paymentValidator = paymentValidator;
     }
 
@@ -46,11 +42,10 @@ public class BankingSystemDialogImpl implements BankingSystemDialog {
 
     @Override
     public void showCardType() {
-        if(paymentValidator.customerCardType()!= null) {
+        if (paymentValidator.customerCardType() != null) {
             System.out.println("Your payment system is  " + paymentValidator.customerCardType());
-        }else {
+        } else {
             System.out.println("Your payment system is doesn't exist " + paymentValidator.customerCardType());
         }
     }
-
 }

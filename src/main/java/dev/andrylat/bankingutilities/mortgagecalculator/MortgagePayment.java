@@ -2,7 +2,7 @@ package dev.andrylat.bankingutilities.mortgagecalculator;
 
 public interface MortgagePayment {
 
-    void setDetailsForCalculation(double[] detailsForCalculation);
+    void setDetailsForCalculation(CustomerData customerData);
 
     void paymentCalculation();
 

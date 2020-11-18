@@ -1,4 +1,4 @@
-package dev.andrylat.bankingutilities.cardvalidator.validators;
+package dev.andrylat.bankingutilities.card;
 
 
 public interface PaymentValidator {

@@ -1,11 +1,11 @@
-package dev.andrylat.bankingutilities.dialog;
+package dev.andrylat.bankingutilities.dialogs;
 
-import dev.andrylat.bankingutilities.cardvalidator.validators.CardValidator;
-import dev.andrylat.bankingutilities.cardvalidator.validators.PaymentValidator;
+import dev.andrylat.bankingutilities.card.CardValidator;
+import dev.andrylat.bankingutilities.card.PaymentValidator;
 
 import java.util.List;
 
-public interface BankingSystemDialog extends Dialog{
+public interface BankingSystemDialog {
 
     String getCustomerData();
 
@@ -18,7 +18,4 @@ public interface BankingSystemDialog extends Dialog{
     void showCardType();
 
     void setCardTypeValidator(PaymentValidator paymentValidator);
-
-
-
 }

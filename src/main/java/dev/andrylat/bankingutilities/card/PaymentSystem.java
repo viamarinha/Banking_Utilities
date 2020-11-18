@@ -1,4 +1,4 @@
-package dev.andrylat.bankingutilities.cardvalidator.bankingsystemenums;
+package dev.andrylat.bankingutilities.card;
 
 public enum PaymentSystem {
 

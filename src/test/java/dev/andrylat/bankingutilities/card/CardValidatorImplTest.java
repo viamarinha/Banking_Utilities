@@ -1,4 +1,4 @@
-package dev.andrylat.bankingutilities.cardvalidator.validators;
+package dev.andrylat.bankingutilities.card;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -16,7 +16,6 @@ class CardValidatorImplTest {
     void setUp() {
 
         cardValidator = new CardValidatorImpl();
-
     }
 
     @Test
@@ -26,8 +25,6 @@ class CardValidatorImplTest {
         List<String> actual = cardValidator.validate(customerInput);
         List<String> expected = new ArrayList<>();
         assertEquals(expected, actual);
-
-
     }
 
     @Test
@@ -38,7 +35,6 @@ class CardValidatorImplTest {
         String[] actual = errorsList.stream().toArray(String[]::new);
         String[] expected = {"incorrect control number"};
         assertArrayEquals(expected, actual);
-
     }
 
     @Test
@@ -67,7 +63,7 @@ class CardValidatorImplTest {
 
         String customerInput = "54478987858522222222";
         List<String> errorsList = cardValidator.validate(customerInput);
-        String[] actual = errorsList.stream().toArray(String[] ::new);
+        String[] actual = errorsList.stream().toArray(String[]::new);
         String[] expected = {"too many digits in card number"};
         assertArrayEquals(expected, actual);
     }
@@ -79,7 +75,7 @@ class CardValidatorImplTest {
         List<String> errorsList = cardValidator.validate(customerInput);
         String[] actual = errorsList.stream().toArray(String[]::new);
         String[] expected = {"wrong card number \n card number should starts within 2 - 6",
-                 "too many digits in card number", "you have entered not a numeric digits"};
+                "too many digits in card number", "you have entered not a numeric digits"};
         assertArrayEquals(expected, actual);
     }
 
