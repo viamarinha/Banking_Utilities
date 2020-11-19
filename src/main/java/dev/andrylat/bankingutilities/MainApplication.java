@@ -1,7 +1,7 @@
 package dev.andrylat.bankingutilities;
 
 import dev.andrylat.bankingutilities.dialogs.Dialog;
-import dev.andrylat.bankingutilities.dialogs.DialogImpl;
+import dev.andrylat.bankingutilities.dialogs.impl.DialogImpl;
 
 public class MainApplication {
 

@@ -1,9 +1,10 @@
-package dev.andrylat.bankingutilities.dialogs;
+package dev.andrylat.bankingutilities.dialogs.impl;
 
-import dev.andrylat.bankingutilities.card.CardValidator;
-import dev.andrylat.bankingutilities.card.CardValidatorImpl;
-import dev.andrylat.bankingutilities.card.PaymentValidator;
-import dev.andrylat.bankingutilities.card.PaymentValidatorImpl;
+import dev.andrylat.bankingutilities.card.validators.CardValidator;
+import dev.andrylat.bankingutilities.card.validators.CardValidatorImpl;
+import dev.andrylat.bankingutilities.dialogs.BankingSystemDialog;
+import dev.andrylat.bankingutilities.dialogs.Dialog;
+import dev.andrylat.bankingutilities.dialogs.MortgageDialog;
 import dev.andrylat.bankingutilities.mortgagecalculator.MortgagePayment;
 import dev.andrylat.bankingutilities.mortgagecalculator.MortgagePaymentImpl;
 import java.util.HashMap;
@@ -12,6 +13,9 @@ import java.util.Map;
 import java.util.Scanner;
 
 public class DialogImpl implements Dialog {
+
+    private static CardValidator cardValidator;
+
     @Override
     public void start() {
         getDataFromCustomer();
@@ -56,7 +60,7 @@ public class DialogImpl implements Dialog {
 
     private void cardValidation() {
         BankingSystemDialog bankingSystemDialog = new BankingSystemDialogImpl();
-        CardValidator cardValidator = new CardValidatorImpl();
+        cardValidator = new CardValidatorImpl();
         bankingSystemDialog.setBankingCardValidator(cardValidator);
         String customerCardNumber = bankingSystemDialog.getCustomerData();
 
@@ -72,8 +76,7 @@ public class DialogImpl implements Dialog {
     private static void showPaymentSystem(String customerCardNumber, BankingSystemDialog bankingSystemDialog) {
 
         int paymentCompanyIdentifier = Integer.parseInt(String.valueOf(customerCardNumber.toCharArray()[0]));
-        PaymentValidator paymentValidator = new PaymentValidatorImpl(paymentCompanyIdentifier);
-        bankingSystemDialog.setCardTypeValidator(paymentValidator);
+        cardValidator.setPaymentCompanyIdentifier(paymentCompanyIdentifier);
         bankingSystemDialog.showCardType();
     }
 }

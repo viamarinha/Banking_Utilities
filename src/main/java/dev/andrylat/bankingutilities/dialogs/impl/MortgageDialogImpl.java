@@ -1,10 +1,11 @@
-package dev.andrylat.bankingutilities.dialogs;
+package dev.andrylat.bankingutilities.dialogs.impl;
 
+import dev.andrylat.bankingutilities.dialogs.MortgageDialog;
 import dev.andrylat.bankingutilities.mortgagecalculator.CustomerData;
 import dev.andrylat.bankingutilities.mortgagecalculator.MortgagePayment;
 import java.util.Scanner;
 
-public class MortgageDialogImpl implements MortgageDialog{
+public class MortgageDialogImpl implements MortgageDialog {
 
     private MortgagePayment mortgagePayment;
 

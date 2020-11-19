@@ -1,5 +1,6 @@
-package dev.andrylat.bankingutilities.card;
+package dev.andrylat.bankingutilities.card.validators;
 
+import dev.andrylat.bankingutilities.card.PaymentSystem;
 import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -13,6 +14,12 @@ public class CardValidatorImpl implements CardValidator {
     private static final int MAX_DIGIT_VALUE = 9;
     private static final Pattern CARD_NUMBER_PATTERN = Pattern.compile(CARD_REGEX);
     private List<String> validationMessages = new LinkedList<>();
+    private int paymentCompanyIdentifier;
+
+    @Override
+    public void setPaymentCompanyIdentifier(int paymentCompanyIdentifier) {
+        this.paymentCompanyIdentifier = paymentCompanyIdentifier;
+    }
 
     public List<String> validate(String customerInput) {
 
@@ -25,6 +32,17 @@ public class CardValidatorImpl implements CardValidator {
             cardsErrorsTreatments(customerInput, cardMatcher);
         }
         return validationMessages;
+    }
+
+
+    @Override
+    public String customerCardType() {
+        PaymentSystem paymentSystem = PaymentSystem.getCardCompanyByIdentifier(paymentCompanyIdentifier);
+        if (paymentSystem != null) {
+            return paymentSystem.getPaymentType();
+        } else {
+            return null;
+        }
     }
 
     private void cardsErrorsTreatments(String customerInput, Matcher cardMatcher) {

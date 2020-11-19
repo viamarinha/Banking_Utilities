@@ -7,7 +7,7 @@ public interface MortgageDialog {
 
     void setMortgagePayments(MortgagePayment mortgagePayment);
 
-    public CustomerData customerPaymentMenu();
+    CustomerData customerPaymentMenu();
 
     void showResult();
 }
