@@ -20,6 +20,10 @@ public class MortgagePaymentImpl implements MortgagePayment {
         this.customerData = customerData;
     }
 
+    public double getPayment() {
+        return this.payment;
+    }
+
     @Override
     public void paymentCalculation() {
 
@@ -40,7 +44,7 @@ public class MortgagePaymentImpl implements MortgagePayment {
         interestRate = (interestRate / 100) / YEAR_WEEKS_VALUE;
         double weekPeriods = yearsPeriod * YEAR_WEEKS_VALUE;
         payment = (principalAmount * interestRate) / (1 - Math.pow(1 + interestRate, -weekPeriods));
-        payment =  Double.parseDouble(new DecimalFormat(DOUBLE_VALUE).format(payment));
+        payment = Double.parseDouble(new DecimalFormat(DOUBLE_VALUE).format(payment));
     }
 
     private void yearlyPaymentCalculation() {
@@ -64,9 +68,5 @@ public class MortgagePaymentImpl implements MortgagePayment {
         yearsPeriod = customerData.getYearsPeriod();
     }
 
-    @Override
-    public String toString() {
-        return "Your Payment is " + payment;
-    }
 
 }

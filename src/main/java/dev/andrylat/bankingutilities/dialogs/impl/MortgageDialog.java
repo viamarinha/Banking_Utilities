@@ -1,21 +1,32 @@
 package dev.andrylat.bankingutilities.dialogs.impl;
 
-import dev.andrylat.bankingutilities.dialogs.MortgageDialog;
+import dev.andrylat.bankingutilities.dialogs.Dialog;
 import dev.andrylat.bankingutilities.mortgagecalculator.CustomerData;
 import dev.andrylat.bankingutilities.mortgagecalculator.MortgagePayment;
+
 import java.util.Scanner;
 
-public class MortgageDialogImpl implements MortgageDialog {
+public class MortgageDialog implements Dialog {
 
     private MortgagePayment mortgagePayment;
 
-    @Override
-    public void setMortgagePayments(MortgagePayment mortgagePayment) {
+    public MortgageDialog(MortgagePayment mortgagePayment) {
         this.mortgagePayment = mortgagePayment;
     }
 
     @Override
-    public CustomerData customerPaymentMenu() {
+    public void start() {
+        mortgagePayment.setDetailsForCalculation(customerPaymentMenu());
+        mortgagePayment.paymentCalculation();
+        showPayment(mortgagePayment.getPayment());
+    }
+
+    private void showPayment(double payment) {
+        System.out.println(payment);
+    }
+
+
+    CustomerData customerPaymentMenu() {
 
         Scanner scan = new Scanner(System.in);
 
@@ -37,7 +48,5 @@ public class MortgageDialogImpl implements MortgageDialog {
         return new CustomerData(principalAmount, interestRate, yearsPeriod, periodChoice);
     }
 
-    public void showResult(){
-        System.out.println(mortgagePayment.toString());
-    }
+
 }

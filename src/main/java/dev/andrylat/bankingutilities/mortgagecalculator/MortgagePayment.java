@@ -6,6 +6,6 @@ public interface MortgagePayment {
 
     void paymentCalculation();
 
-    String toString();
+    double getPayment();
 
-   }
+}
