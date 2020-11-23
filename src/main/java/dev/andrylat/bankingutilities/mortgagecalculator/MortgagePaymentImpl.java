@@ -35,7 +35,7 @@ public class MortgagePaymentImpl implements MortgagePayment {
         } else if (periodChose == WEEK) {
             weeklyPaymentCalculation();
         } else {
-            throw new IllegalArgumentException();
+            throw new IllegalArgumentException("Your data have an incorrect format");
         }
     }
 
