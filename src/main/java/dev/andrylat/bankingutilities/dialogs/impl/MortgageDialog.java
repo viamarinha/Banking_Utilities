@@ -16,7 +16,7 @@ public class MortgageDialog implements Dialog {
 
     @Override
     public void start() {
-        mortgagePayment.setMortgageDetails(ShowCustomerPaymentMenu());
+        mortgagePayment.setMortgageDetails(showCustomerPaymentMenu());
         mortgagePayment.paymentCalculation();
         showPayment(mortgagePayment.getPayment());
     }
@@ -25,7 +25,7 @@ public class MortgageDialog implements Dialog {
         System.out.println("Your payment is : " + payment + "\n");
     }
 
-    private CustomerData ShowCustomerPaymentMenu() {
+    private CustomerData showCustomerPaymentMenu() {
 
         Scanner scan = new Scanner(System.in);
 
@@ -46,7 +46,7 @@ public class MortgageDialog implements Dialog {
 
         if (principalAmount <= 0 || interestRate <= 0 || yearsPeriod <= 0 || periodChoice <= 0) {
             System.err.println("You have entered wrong calculation data , please make your choice ");
-            ShowCustomerPaymentMenu();
+            showCustomerPaymentMenu();
         }
         return new CustomerData(principalAmount, interestRate, yearsPeriod, periodChoice);
     }
