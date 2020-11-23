@@ -2,11 +2,12 @@ package dev.andrylat.bankingutilities.card;
 
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class PaymentValidatorImplTest {
 
     @Test
-    void customerCardType_shouldReturnMasterCard2017_whenSystemId2() {
+    void customerCardType_ShouldReturnMasterCard2017_WhenSystemId2() {
 
         int systemId = 2;
         PaymentSystem paymentSystem = PaymentSystem.getCardCompanyByIdentifier(systemId);
@@ -16,7 +17,7 @@ class PaymentValidatorImplTest {
     }
 
     @Test
-    void customerCardType_shouldReturnAmericanExpress_whenSystemId3(){
+    void customerCardType_ShouldReturnAmericanExpress_WhenSystemId3(){
 
         int systemId = 3;
         PaymentSystem paymentSystem = PaymentSystem.getCardCompanyByIdentifier(systemId);
@@ -26,7 +27,7 @@ class PaymentValidatorImplTest {
     }
 
     @Test
-    void customerCardType_shouldReturnVisa_whenSystemId4(){
+    void customerCardType_ShouldReturnVisa_WhenSystemId4(){
 
         int systemId = 4;
         PaymentSystem paymentSystem = PaymentSystem.getCardCompanyByIdentifier(systemId);
@@ -36,7 +37,7 @@ class PaymentValidatorImplTest {
     }
 
     @Test
-    void customerCardType_shouldReturnMasterCard_whenSystemId5(){
+    void customerCardType_ShouldReturnMasterCard_WhenSystemId5(){
 
         int systemId = 5;
         PaymentSystem paymentSystem = PaymentSystem.getCardCompanyByIdentifier(systemId);
@@ -46,7 +47,7 @@ class PaymentValidatorImplTest {
     }
 
     @Test
-    void customerCardType_shouldReturnMasterCard_whenSystemId6(){
+    void customerCardType_ShouldReturnMasterCard_WhenSystemId6(){
 
         int systemId = 6;
         PaymentSystem paymentSystem = PaymentSystem.getCardCompanyByIdentifier(systemId);
@@ -55,6 +56,12 @@ class PaymentValidatorImplTest {
         assertEquals(expected, actual);
     }
 
+    @Test
+    void customerCardType_ShouldReturnNull_WhenSystemIdDoestExist() {
 
-
+        int systemId = 9;
+        PaymentSystem actual = PaymentSystem.getCardCompanyByIdentifier(systemId);
+        Object expected = null;
+        assertEquals(expected, actual);
+    }
 }

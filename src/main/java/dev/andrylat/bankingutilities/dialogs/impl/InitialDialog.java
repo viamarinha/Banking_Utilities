@@ -3,7 +3,6 @@ package dev.andrylat.bankingutilities.dialogs.impl;
 import dev.andrylat.bankingutilities.card.validators.CardValidatorImpl;
 import dev.andrylat.bankingutilities.dialogs.Dialog;
 import dev.andrylat.bankingutilities.mortgagecalculator.MortgagePaymentImpl;
-
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
@@ -12,6 +11,11 @@ public class InitialDialog implements Dialog {
 
     private Map<String, Runnable> commands;
 
+    public InitialDialog() {
+
+        setPossibleChoices();
+    }
+
     @Override
     public void start() {
         getDataFromCustomer();
@@ -19,7 +23,7 @@ public class InitialDialog implements Dialog {
 
     private void getDataFromCustomer() {
 
-        System.out.println("Make your choice please :" +
+        System.out.println("\n Make your choice please :" +
                 " \n For credit card validation press 1 " +
                 "\n For mortgage calculator press 2 " +
                 "\n For exit press exit");
@@ -31,24 +35,28 @@ public class InitialDialog implements Dialog {
         while (!isFinished) {
 
             if ("exit".equalsIgnoreCase(customerChoice))
-                break;
-            setCustomerSystems();
+                isFinished = true;
             Runnable operation = commands.get(customerChoice);
             if (operation == null) {
                 System.err.println("You have entered wrong choice");
                 getDataFromCustomer();
             } else {
                 operation.run();
-                isFinished = true;
+                getDataFromCustomer();
             }
         }
     }
 
-    private void setCustomerSystems() {
+    private void setPossibleChoices() {
 
         commands = new HashMap<>();
         commands.put("1", () -> cardValidation());
         commands.put("2", () -> mortgageCalculator());
+        commands.put("exit", () -> endProgram());
+    }
+
+    private void endProgram() {
+        System.exit(0);
     }
 
     private void cardValidation() {

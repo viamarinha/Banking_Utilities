@@ -16,7 +16,7 @@ public class MortgagePaymentImpl implements MortgagePayment {
     private double payment;
     private CustomerData customerData;
 
-    public void setDetailsForCalculation(CustomerData customerData) {
+    public void setMortgageDetails(CustomerData customerData) {
         this.customerData = customerData;
     }
 

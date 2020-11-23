@@ -19,7 +19,7 @@ class CardValidatorImplTest {
     }
 
     @Test
-    void validateControlNumber_shouldReturnEmptyList_WhenInputRightData() {
+    void validateControlNumber_ShouldReturnEmptyList_WhenInputRightData() {
 
         String customerInput = "4024007192661477";
         List<String> actual = cardValidator.validate(customerInput);
@@ -28,7 +28,7 @@ class CardValidatorImplTest {
     }
 
     @Test
-    void validateControlNumber_shouldReturnIncorrectControlNumber_whenControlNumberNoGood() {
+    void validateControlNumber_ShouldReturnIncorrectControlNumber_WhenControlNumberNoGood() {
 
         String customerInput = "4024 007192661478";
         List<String> errorsList = cardValidator.validate(customerInput);
@@ -38,7 +38,7 @@ class CardValidatorImplTest {
     }
 
     @Test
-    void validate_shouldReturn2ErrorsMessages_firstNumberNotIn2To6AndNotEnoughDigits() {
+    void validate_ShouldReturn2ErrorsMessages_WhenFirstNumberNotIn2To6AndNotEnoughDigits() {
 
         String customerInput = "7899";
         List<String> errorsList = cardValidator.validate(customerInput);
@@ -48,7 +48,7 @@ class CardValidatorImplTest {
     }
 
     @Test
-    void validate_shouldReturn3ErrorMessages_whenNotEnoughDigitsAndAlphabeticalChars() {
+    void validate_ShouldReturn3ErrorMessages_WhenNotEnoughDigitsAndAlphabeticalChars() {
 
         String customerInput = "A899";
         List<String> errorsList = cardValidator.validate(customerInput);
@@ -59,7 +59,7 @@ class CardValidatorImplTest {
     }
 
     @Test
-    void validate_shouldReturnTooManyDigits_whenToManyDigits() {
+    void validate_ShouldReturnTooManyDigits_WhenToManyDigits() {
 
         String customerInput = "54478987858522222222";
         List<String> errorsList = cardValidator.validate(customerInput);
@@ -69,7 +69,7 @@ class CardValidatorImplTest {
     }
 
     @Test
-    void validate_shouldReturn3ErrorMessages_whenWrongSystemIdentifierTooManyDigitsAlphanumerics() {
+    void validate_ShouldReturn3ErrorMessages_WhenWrongSystemIdentifierTooManyDigitsAlphanumerics() {
 
         String customerInput = "A784-8989-8888-8787-7777";
         List<String> errorsList = cardValidator.validate(customerInput);
@@ -80,7 +80,7 @@ class CardValidatorImplTest {
     }
 
     @Test
-    void validate_shouldReturn1ErrorMessage_whenWrongPaymentSystemId() {
+    void validate_ShouldReturn1ErrorMessage_WhenWrongPaymentSystemId() {
 
         String customerInput = "9784545454545454";
         List<String> errorsList = cardValidator.validate(customerInput);

@@ -9,13 +9,9 @@ import java.util.Scanner;
 
 public class BankingDialog implements Dialog {
 
-
     private int paymentCompanyIdentifier;
     private CardValidator cardValidator;
     private String customerData;
-
-
-
 
     public BankingDialog(CardValidator cardValidator) {
         this.cardValidator = cardValidator;
@@ -23,9 +19,9 @@ public class BankingDialog implements Dialog {
 
     @Override
     public void start() {
-         customerData = getCustomerData();
+        customerData = getCustomerData();
 
-        List<String> errorResult =  validateCustomerInput(customerData);
+        List<String> errorResult = validateCustomerInput(customerData);
         if (errorResult.isEmpty()) {
             setPaymentCompanyIdentifier(customerData);
             showCardType();
@@ -34,13 +30,11 @@ public class BankingDialog implements Dialog {
             errorResult.clear();
             start();
         }
-
     }
 
     public void setPaymentCompanyIdentifier(String customerData) {
         this.paymentCompanyIdentifier = Integer.parseInt(String.valueOf(customerData.toCharArray()[0]));
     }
-
 
     public String getCustomerData() {
 
@@ -50,20 +44,17 @@ public class BankingDialog implements Dialog {
         return scanner.nextLine();
     }
 
-
     public <K> void showErrorsLog(List<K> errorResult) {
         errorResult.forEach(System.err::println);
     }
-
 
     public List<String> validateCustomerInput(String customerInput) {
         return cardValidator.validate(customerInput);
     }
 
-
     public void showCardType() {
         if (customerCardType() != null) {
-            System.out.println("Your payment system is  " + customerCardType());
+            System.out.println("Your payment system is  " + customerCardType() + "\n");
         } else {
             System.err.println("Your payment system  doesn't exist " + customerCardType());
         }
@@ -77,6 +68,4 @@ public class BankingDialog implements Dialog {
             return null;
         }
     }
-
-
 }

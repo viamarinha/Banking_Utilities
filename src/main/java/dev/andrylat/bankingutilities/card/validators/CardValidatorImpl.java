@@ -6,24 +6,24 @@ import java.util.regex.Pattern;
 
 public class CardValidatorImpl implements CardValidator {
 
-    private static final String CARD_REGEX = "([2-6]([0-9]{3})(\\s|-)?)(([0-9]{4}(\\s|-)?){3})";
+    private static final String CARD_NUMBER = "([2-6]([0-9]{3})(\\s|-)?)(([0-9]{4}(\\s|-)?){3})";
     private static final String NUMERIC_DIGITS = "[0-9]+";
     private static final String SPACE_DASH_REGEX = "[\\s-]";
     private static final int CREDIT_CARD_NUMBER_SIZE = 16;
     private static final int MAX_DIGIT_VALUE = 9;
-    private static final Pattern CARD_NUMBER_PATTERN = Pattern.compile(CARD_REGEX);
+    private static final Pattern CARD_NUMBER_PATTERN = Pattern.compile(CARD_NUMBER);
     private List<String> validationMessages = new LinkedList<>();
 
 
-    public List<String> validate(String customerInput) {
+    public List<String> validate(String input) {
 
-        Matcher cardMatcher = CARD_NUMBER_PATTERN.matcher(customerInput);
+        Matcher cardMatcher = CARD_NUMBER_PATTERN.matcher(input);
         if (cardMatcher.matches()) {
-            if (validateControlNumber(customerInput)) {
+            if (validateControlNumber(input)) {
                 return validationMessages;
             }
         } else {
-            cardsErrorsTreatments(customerInput, cardMatcher);
+            cardsErrorsTreatments(input, cardMatcher);
         }
         return validationMessages;
     }

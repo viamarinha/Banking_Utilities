@@ -16,13 +16,13 @@ public class MortgageDialog implements Dialog {
 
     @Override
     public void start() {
-        mortgagePayment.setDetailsForCalculation(customerPaymentMenu());
+        mortgagePayment.setMortgageDetails(customerPaymentMenu());
         mortgagePayment.paymentCalculation();
         showPayment(mortgagePayment.getPayment());
     }
 
     private void showPayment(double payment) {
-        System.out.println(payment);
+        System.out.println("Your payment is : " + payment + "\n");
     }
 
 
@@ -39,7 +39,7 @@ public class MortgageDialog implements Dialog {
         System.out.print("Enter Time period in years : ");
         double yearsPeriod = scan.nextDouble();
 
-        System.out.println("Please select payment period : " +
+        System.out.println("\n Please select payment period : " +
                 "\n For Year payment press 1 " +
                 "\n For Monthly payment press 2  " +
                 "\n For Weekly period press 3 ");
