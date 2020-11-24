@@ -22,7 +22,7 @@ public class MortgageDialog implements Dialog {
     }
 
     private void showPayment(double payment) {
-        System.out.println("Your payment is : " + payment + "\n");
+        System.out.println("Your payment is : " + payment + " $ \n");
     }
 
     private CustomerData showCustomerPaymentMenu() {
