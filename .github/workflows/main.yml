@@ -1,13 +1,15 @@
 name: Build Java
 on:
+ schedule:
+  - cron: "0 2 * * 1-5"
  push:
     branches: [ master ]
  pull_request:
-    branches: [ master ]
+    branches: [ master ]  
 jobs:
   build-jdk8:
     runs-on: ubuntu-latest
-    name: Build Java 8 projects
+    name: Build Maven Project
     steps:
     - uses: actions/checkout@v1
     - uses: actions/cache@v1
