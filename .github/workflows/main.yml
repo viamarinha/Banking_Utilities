@@ -1,9 +1,9 @@
 name: Build Java
 on:
  push:
-    branches: [ dev ]
+    branches: [ master ]
  pull_request:
-    branches: [ dev ]
+    branches: [ master ]
 jobs:
   build-jdk8:
     runs-on: ubuntu-latest
