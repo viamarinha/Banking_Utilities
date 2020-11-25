@@ -5,6 +5,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>dev.andrylat</groupId>
     <artifactId>banking_utilities</artifactId>
+    <packaging>pom</packaging>
     <version>1.0-SNAPSHOT</version>
     <build>
         <plugins>
@@ -32,6 +33,10 @@
             </plugin>
         </plugins>
     </build>
+    <modules>
+        <module>Banking_Functionallity</module>
+        <module>Dialogs</module>
+    </modules>
     <dependencies>
         <!-- https://mvnrepository.com/artifact/org.apache.maven.plugins/maven-failsafe-plugin -->
         <dependency>
@@ -50,6 +55,18 @@
             <groupId>org.apache.maven.surefire</groupId>
             <artifactId>surefire-api</artifactId>
             <version>3.0.0-M5</version>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>dev.andrylat</groupId>
+            <artifactId>Banking_Functionallity</artifactId>
+            <version>1.0-SNAPSHOT</version>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>dev.andrylat</groupId>
+            <artifactId>Dialogs</artifactId>
+            <version>1.0-SNAPSHOT</version>
             <scope>compile</scope>
         </dependency>
 
