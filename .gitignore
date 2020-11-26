@@ -34,9 +34,9 @@
 # Log file
 *.log
 *.iml
-.idea
+*.idea
 *.lst
-
+target
 # BlueJ files
 *.ctxt
 
