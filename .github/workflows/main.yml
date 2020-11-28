@@ -4,7 +4,6 @@ on:
   push:
     branches:
       - master
-      - dev
   pull_request:
       types: [opened, synchronize, reopened]
 name: Main Workflow
@@ -20,4 +19,4 @@ jobs:
       uses: sonarsource/sonarcloud-github-action@master
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        SONAR_HOST_URL: https://sonarcloud.io
+        SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
