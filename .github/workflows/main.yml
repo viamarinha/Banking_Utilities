@@ -20,4 +20,4 @@ jobs:
       uses: ec15c0ddee169ffaf363462f91ee605da1251cc8
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+        SONAR_HOST_URL: https://sonarcloud.io
